@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoForm } from "./components/TodoForm";
+import { TodoList } from "./components/TodoList";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -17,7 +18,6 @@ const App = () => {
         });
         const json = await response.json();
         setTodos((prevTodos) => [...prevTodos, json]);
-        console.log(json);
       } catch (error) {
         console.log(error);
       }
@@ -25,11 +25,24 @@ const App = () => {
       console.log("Error");
     }
   };
+  const getTodos = async () => {
+    try {
+      const response = await fetch("https://easydev.club/api/v1/todos");
+      const json = await response.json();
+      setTodos(json.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getTodos();
+  }, []);
 
   return (
     <>
       <h1>Todo App</h1>
       <TodoForm addTask={addTask} />
+      <TodoList todos={todos} />
     </>
   );
 };
