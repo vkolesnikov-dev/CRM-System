@@ -1,4 +1,4 @@
-import { TodoItem } from "./TodoItem";
+import { TodoItem } from "../TodoItem/TodoItem.tsx";
 
 export const TodoList = ({ todos }) => {
   return (

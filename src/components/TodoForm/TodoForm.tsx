@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./TodoForm.module.scss";
 
 export const TodoForm = ({ addTask }) => {
   const [todoInput, setTodoInput] = useState("");
@@ -17,7 +18,7 @@ export const TodoForm = ({ addTask }) => {
         value={todoInput}
         onChange={handleChange}
       />
-      <button>Add</button>
+      <button className={styles.button}>Add</button>
     </form>
   );
 };

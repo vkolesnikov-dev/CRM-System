@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { TodoForm } from "./components/TodoForm";
-import { TodoList } from "./components/TodoList";
+import { TodoForm } from "./components/TodoForm/TodoForm.tsx";
+import { TodoList } from "./components/TodoList/TodoList.tsx";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
