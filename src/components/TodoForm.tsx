@@ -1,7 +1,22 @@
-export const TodoForm = () => {
+import { useState } from "react";
+
+export const TodoForm = ({ addTask }) => {
+  const [todoInput, setTodoInput] = useState("");
+  const handleChange = (event) => {
+    setTodoInput(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addTask(todoInput);
+    setTodoInput("");
+  };
   return (
-    <form>
-      <input placeholder="Task To Be Done..." />
+    <form onSubmit={handleSubmit}>
+      <input
+        placeholder="Task To Be Done..."
+        value={todoInput}
+        onChange={handleChange}
+      />
       <button>Add</button>
     </form>
   );
