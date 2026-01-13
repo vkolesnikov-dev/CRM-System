@@ -1,3 +1,20 @@
 .button {
-  background-color: red;
+  background-color: rgb(70, 105, 243);
+  color: rgb(255, 255, 255);
+  border: none;
+  width: 70px;
+  height: 30px;
+  border-radius: 3px;
+  margin-left: 4px;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid rgb(193, 190, 190);
+  width: 200px;
+  margin-right: 20px;
+}
+
+.input:focus {
+  outline: none;
 }

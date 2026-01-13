@@ -14,6 +14,7 @@ export const TodoForm = ({ addTask }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className={styles.input}
         placeholder="Task To Be Done..."
         value={todoInput}
         onChange={handleChange}

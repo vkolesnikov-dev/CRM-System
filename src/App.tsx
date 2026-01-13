@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TodoForm } from "./components/TodoForm/TodoForm.tsx";
 import { TodoList } from "./components/TodoList/TodoList.tsx";
+import styles from "./App.module.scss";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -39,11 +40,11 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <h1>Todo App</h1>
+    <div className={styles.box}>
+      <h1 className={styles.title}>Todo App</h1>
       <TodoForm addTask={addTask} />
       <TodoList todos={todos} />
-    </>
+    </div>
   );
 };
 

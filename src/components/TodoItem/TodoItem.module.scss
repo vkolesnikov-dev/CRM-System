@@ -1,0 +1,33 @@
+.item {
+  border: 1px solid rgb(207, 206, 206);
+  padding: 8px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.delButton {
+  background-color: rgb(70, 105, 243);
+  border: none;
+  color: rgb(255, 255, 255);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: rgb(242, 19, 19);
+  border: none;
+  color: rgb(255, 255, 255);
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 60%;
+}
