@@ -1,10 +1,16 @@
 import styles from "./TodoItem.module.scss";
 import Delete from "../../assets/trash.svg";
 import Edit from "../../assets/pen.svg";
-export const TodoItem = ({ task }) => {
+export const TodoItem = ({ task, onUpdateTodo }) => {
+  const handleStatus = async () => {
+    if (!onUpdateTodo) return;
+
+    const newStatus = !task.isDone;
+    await onUpdateTodo(task.id, newStatus);
+  };
   return (
     <li className={styles.item}>
-      <input type="checkbox" />
+      <input type="checkbox" onChange={handleStatus} checked={task.isDone} />
       <span className={styles.text}>{task.title}</span>
       <div>
         <button className={styles.delButton}>
