@@ -10,7 +10,7 @@ const App = () => {
     getTodos();
   }, []);
 
-  const addTask = async (todoInput) => {
+  const addTask = async (todoInput: string) => {
     const isValid = todoInput.length >= 2 && todoInput.length < 64;
     if (todoInput && isValid) {
       const newTask = {
@@ -32,7 +32,24 @@ const App = () => {
     }
   };
 
-  const updateStatus = async (id, completed) => {
+  const deleteTask = async (id: number) => {
+    const todoToDelete = todos.find((todo) => todo.id === id);
+    if (!todoToDelete) return;
+
+    const response = await fetch(`https://easydev.club/api/v1/todos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed delete task");
+    }
+
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const updateStatus = async (id: number, completed: boolean) => {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (!todoToUpdate) return;
 
@@ -58,7 +75,7 @@ const App = () => {
 
     setTodos((prevTodos) => {
       return prevTodos.map((todo) => {
-        todo.id === id ? updatedTodo : todo;
+        return todo.id === id ? updatedTodo : todo;
       });
     });
   };
@@ -66,10 +83,7 @@ const App = () => {
     try {
       const response = await fetch("https://easydev.club/api/v1/todos");
       const json = await response.json();
-
       setTodos(json.data);
-      console.log(json);
-      console.log(todos);
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +93,11 @@ const App = () => {
     <div className={styles.box}>
       <h1 className={styles.title}>Todo App</h1>
       <TodoForm addTask={addTask} />
-      <TodoList todos={todos} onUpdateTodo={updateStatus} />
+      <TodoList
+        todos={todos}
+        onUpdateTodo={updateStatus}
+        onDeleteTodo={deleteTask}
+      />
     </div>
   );
 };
