@@ -49,14 +49,18 @@ const App = () => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  const updateStatus = async (id: number, completed: boolean) => {
+  const updateStatus = async (
+    id: number,
+    completed: boolean,
+    title: string,
+  ) => {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (!todoToUpdate) return;
 
     const updatedTask = {
       ...todoToUpdate,
       isDone: completed,
-      title: todoToUpdate.title,
+      title: title,
     };
 
     const response = await fetch(`https://easydev.club/api/v1/todos/${id}`, {
