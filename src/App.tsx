@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { TodoForm } from "./components/TodoForm/TodoForm.tsx";
 import { TodoList } from "./components/TodoList/TodoList.tsx";
 import styles from "./App.module.scss";
+import { TodoFilters } from "./components/TodoFilters/TodoFilters.tsx";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -52,7 +53,7 @@ const App = () => {
   const updateStatus = async (
     id: number,
     completed: boolean,
-    title: string,
+    title: string
   ) => {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (!todoToUpdate) return;
@@ -93,10 +94,39 @@ const App = () => {
     }
   };
 
+  const getProgressTodos = async () => {
+    try {
+      const response = await fetch("https://easydev.club/api/v1/todos");
+      const json = await response.json();
+      const newTodos = json.data.filter((todo) => todo.isDone === false);
+      setTodos(newTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCompletedTodos = async () => {
+    try {
+      const response = await fetch("https://easydev.club/api/v1/todos");
+      const json = await response.json();
+      const newTodos = json.data.filter((todo) => todo.isDone === true);
+      setTodos(newTodos);
+    } catch (error) {
+      console.log(error);
+    }
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.isDone === true);
+    });
+  };
+
   return (
     <div className={styles.box}>
       <h1 className={styles.title}>Todo App</h1>
       <TodoForm addTask={addTask} />
+      <TodoFilters
+        onGetProgressTodo={getProgressTodos}
+        onGetAllTodo={getTodos}
+        onGetCompleted={getCompletedTodos}
+      />
       <TodoList
         todos={todos}
         onUpdateTodo={updateStatus}

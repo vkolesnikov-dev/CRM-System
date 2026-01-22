@@ -1,0 +1,26 @@
+.allTodo {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  border-bottom: 1px solid silver;
+}
+.progressTodo {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-bottom: 1px solid silver;
+}
+.completedTodo {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-bottom: 1px solid silver;
+}
+
+.containerTodo {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
