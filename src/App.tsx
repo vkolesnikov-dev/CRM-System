@@ -4,8 +4,15 @@ import { TodoList } from "./components/TodoList/TodoList.tsx";
 import styles from "./App.module.scss";
 import { TodoFilters } from "./components/TodoFilters/TodoFilters.tsx";
 
+export interface Todo {
+  id: number;
+  title: string;
+  created: string;
+  isDone: boolean;
+}
+
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
     getTodos();
@@ -98,7 +105,7 @@ const App = () => {
     try {
       const response = await fetch("https://easydev.club/api/v1/todos");
       const json = await response.json();
-      const newTodos = json.data.filter((todo) => todo.isDone === false);
+      const newTodos = json.data.filter((todo: Todo) => todo.isDone === false);
       setTodos(newTodos);
     } catch (error) {
       console.log(error);
@@ -108,13 +115,13 @@ const App = () => {
     try {
       const response = await fetch("https://easydev.club/api/v1/todos");
       const json = await response.json();
-      const newTodos = json.data.filter((todo) => todo.isDone === true);
+      const newTodos = json.data.filter((todo: Todo) => todo.isDone === true);
       setTodos(newTodos);
     } catch (error) {
       console.log(error);
     }
     setTodos((prevTodos) => {
-      return prevTodos.filter((todo) => todo.isDone === true);
+      return prevTodos.filter((todo: Todo) => todo.isDone === true);
     });
   };
 

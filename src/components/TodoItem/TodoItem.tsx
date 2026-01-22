@@ -4,7 +4,18 @@ import Edit from "../../assets/pen.svg";
 import Save from "../../assets/save.svg";
 import Close from "../../assets/close.svg";
 import { useState } from "react";
-export const TodoItem = ({ task, onUpdateTodo, onDeleteTodo }) => {
+import type { Todo } from "../../App";
+
+interface TodoItemProps {
+  task: Todo;
+  onUpdateTodo: (id: number, newStatus: boolean, inputValue?: string) => void;
+  onDeleteTodo: (id: number) => void;
+}
+export const TodoItem = ({
+  task,
+  onUpdateTodo,
+  onDeleteTodo,
+}: TodoItemProps) => {
   const [isChange, setIsChange] = useState(true);
   const [inputValue, setInputValue] = useState(task.title);
 

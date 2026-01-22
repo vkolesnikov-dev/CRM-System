@@ -1,10 +1,16 @@
 import styles from "./TodoFilters.module.scss";
 
+interface TodoFiltersProps {
+  onGetProgressTodo: () => void;
+  onGetAllTodo: () => void;
+  onGetCompleted: () => void;
+}
+
 export const TodoFilters = ({
   onGetProgressTodo,
   onGetAllTodo,
   onGetCompleted,
-}) => {
+}: TodoFiltersProps) => {
   const getProgressTodo = () => {
     onGetProgressTodo();
   };

@@ -1,7 +1,18 @@
+import type { Todo } from "../../App.tsx";
 import { TodoItem } from "../TodoItem/TodoItem.tsx";
 import styles from "./TodoList.module.scss";
 
-export const TodoList = ({ todos, onUpdateTodo, onDeleteTodo }) => {
+interface TodoListProps {
+  todos: Todo[];
+  onUpdateTodo: (id: number, completed: boolean, title?: string) => void;
+  onDeleteTodo: () => void;
+}
+
+export const TodoList = ({
+  todos,
+  onUpdateTodo,
+  onDeleteTodo,
+}: TodoListProps) => {
   return (
     <ul className={styles.box}>
       {todos.map((elem: any) => (

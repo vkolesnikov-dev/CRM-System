@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, type SetStateAction } from "react";
 import styles from "./TodoForm.module.scss";
 
-export const TodoForm = ({ addTask }) => {
+interface TodoFormProps {
+  addTask: (todoInput: string) => void;
+}
+
+export const TodoForm = ({ addTask }: TodoFormProps) => {
   const [todoInput, setTodoInput] = useState("");
-  const handleChange = (event) => {
+  const handleChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setTodoInput(event.target.value);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     addTask(todoInput);
     setTodoInput("");
