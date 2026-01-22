@@ -5,7 +5,7 @@ import styles from "./TodoList.module.scss";
 interface TodoListProps {
   todos: Todo[];
   onUpdateTodo: (id: number, completed: boolean, title?: string) => void;
-  onDeleteTodo: () => void;
+  onDeleteTodo: (id: number) => void;
 }
 
 export const TodoList = ({

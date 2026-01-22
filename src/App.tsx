@@ -60,7 +60,7 @@ const App = () => {
   const updateStatus = async (
     id: number,
     completed: boolean,
-    title: string
+    title: string | undefined
   ) => {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (!todoToUpdate) return;
