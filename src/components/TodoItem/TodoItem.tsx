@@ -26,14 +26,14 @@ export const TodoItem = ({
     if (!onUpdateTodo) return;
 
     const newStatus = !task.isDone;
-    await onUpdateTodo(task.id, newStatus);
+    onUpdateTodo(task.id, newStatus);
   };
   const handleTitle = async () => {
-    await onUpdateTodo(task.id, task.isDone, inputValue);
+    onUpdateTodo(task.id, task.isDone, inputValue);
     setIsChange(!isChange);
   };
   const deleteTask = async () => {
-    await onDeleteTodo(task.id);
+    onDeleteTodo(task.id);
   };
   if (isChange) {
     return (

@@ -10,9 +10,20 @@ export interface Todo {
   created: string;
   isDone: boolean;
 }
+export interface TodoInfo {
+  all: number;
+  completed: number;
+  inWork: number;
+}
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+
+  const todoInfo: TodoInfo = {
+    all: todos.length,
+    completed: todos.filter((todo) => todo.isDone).length,
+    inWork: todos.filter((todo) => !todo.isDone).length,
+  };
 
   useEffect(() => {
     getTodos();
@@ -133,6 +144,7 @@ const App = () => {
         onGetProgressTodo={getProgressTodos}
         onGetAllTodo={getTodos}
         onGetCompleted={getCompletedTodos}
+        todoInfo={todoInfo}
       />
       <TodoList
         todos={todos}
