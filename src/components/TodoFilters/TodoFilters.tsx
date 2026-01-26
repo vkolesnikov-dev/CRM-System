@@ -17,7 +17,6 @@ export const TodoFilters = ({
 }: TodoFiltersProps) => {
   const [activeFilter, setActiveFilter] = useState("all");
 
-  console.log(todoInfo);
   const getProgressTodo = () => {
     setActiveFilter("inWork");
     onGetProgressTodo();

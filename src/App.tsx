@@ -18,6 +18,7 @@ export interface TodoInfo {
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState("all");
 
   const todoInfo: TodoInfo = {
     all: todos.length,
@@ -29,6 +30,15 @@ const App = () => {
     getTodos();
   }, []);
 
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "completed") {
+      return todo.isDone;
+    }
+    if (filter === "inWork") {
+      return !todo.isDone;
+    }
+    return true;
+  });
   const addTask = async (todoInput: string) => {
     const isValid = todoInput.length >= 2 && todoInput.length < 64;
     if (todoInput && isValid) {
@@ -71,7 +81,7 @@ const App = () => {
   const updateStatus = async (
     id: number,
     completed: boolean,
-    title: string | undefined
+    title: string | undefined,
   ) => {
     const todoToUpdate = todos.find((todo) => todo.id === id);
     if (!todoToUpdate) return;
@@ -112,42 +122,18 @@ const App = () => {
     }
   };
 
-  const getProgressTodos = async () => {
-    try {
-      const response = await fetch("https://easydev.club/api/v1/todos");
-      const json = await response.json();
-      const newTodos = json.data.filter((todo: Todo) => todo.isDone === false);
-      setTodos(newTodos);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getCompletedTodos = async () => {
-    try {
-      const response = await fetch("https://easydev.club/api/v1/todos");
-      const json = await response.json();
-      const newTodos = json.data.filter((todo: Todo) => todo.isDone === true);
-      setTodos(newTodos);
-    } catch (error) {
-      console.log(error);
-    }
-    setTodos((prevTodos) => {
-      return prevTodos.filter((todo: Todo) => todo.isDone === true);
-    });
-  };
-
   return (
     <div className={styles.box}>
       <h1 className={styles.title}>Todo App</h1>
       <TodoForm addTask={addTask} />
       <TodoFilters
-        onGetProgressTodo={getProgressTodos}
-        onGetAllTodo={getTodos}
-        onGetCompleted={getCompletedTodos}
+        onGetProgressTodo={() => setFilter("inWork")}
+        onGetAllTodo={() => setFilter("all")}
+        onGetCompleted={() => setFilter("completed")}
         todoInfo={todoInfo}
       />
       <TodoList
-        todos={todos}
+        todos={filteredTodos}
         onUpdateTodo={updateStatus}
         onDeleteTodo={deleteTask}
       />
