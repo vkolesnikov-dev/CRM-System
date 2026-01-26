@@ -37,28 +37,43 @@ export const TodoItem = ({
   };
   if (isChange) {
     return (
-      <li className={styles.item}>
-        <input type="checkbox" onChange={handleStatus} checked={task.isDone} />
+      <li className={`${styles.item} ${task.isDone ? styles.done : ""}`}>
+        <label className={styles.circleCheck}>
+          <input
+            type="checkbox"
+            onChange={handleStatus}
+            checked={task.isDone}
+          />
+          <span className={styles.checkmark}></span>
+        </label>
         <span className={styles.text}>{task.title}</span>
-        <div>
-          <button onClick={deleteTask} className={styles.delButton}>
-            <img src={Delete} alt="Delete" />
-          </button>
+        <div className={styles.btnBlock}>
           <button onClick={handleChangeTask} className={styles.editButton}>
             <img src={Edit} alt="Edit" />
+          </button>
+          <button onClick={deleteTask} className={styles.delButton}>
+            <img src={Delete} alt="Delete" />
           </button>
         </div>
       </li>
     );
   } else {
     return (
-      <li className={styles.item}>
-        <input type="checkbox" onChange={handleStatus} checked={task.isDone} />
+      <li className={`${styles.item} ${task.isDone ? styles.done : ""}`}>
+        <label className={styles.circleCheck}>
+          <input
+            type="checkbox"
+            onChange={handleStatus}
+            checked={task.isDone}
+          />
+          <span className={styles.checkmark}></span>
+        </label>
         <input
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          className={styles.editInput}
         />
-        <div>
+        <div className={styles.btnBlock}>
           <button onClick={deleteTask} className={styles.delButton}>
             <img src={Delete} alt="Delete" />
           </button>

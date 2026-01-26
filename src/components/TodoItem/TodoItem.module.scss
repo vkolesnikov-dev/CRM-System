@@ -1,33 +1,94 @@
 .item {
   border: 1px solid rgb(207, 206, 206);
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  margin-top: 4px;
   padding: 8px;
   list-style-type: none;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .delButton {
   background-color: rgb(70, 105, 243);
   border: none;
-  color: rgb(255, 255, 255);
   width: 30px;
   height: 30px;
   cursor: pointer;
+  margin-right: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .editButton {
   background-color: rgb(242, 19, 19);
   border: none;
-  color: rgb(255, 255, 255);
   width: 30px;
   height: 30px;
-  margin-left: 5px;
+  margin-right: 5px;
   cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+.btnBlock {
+  display: flex;
+}
 .text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 60%;
+}
+
+.circleCheck {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+}
+
+.circleCheck input {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgb(70, 105, 243);
+  border-radius: 50%;
+  position: relative;
+}
+.checkmark::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 9px;
+  border: solid rgb(255, 255, 255);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  left: 5px;
+  top: 2px;
+  opacity: 0;
+}
+.circleCheck input:checked + .checkmark {
+  background-color: rgb(70, 105, 243);
+}
+.circleCheck input:checked + .checkmark::after {
+  opacity: 1;
+}
+.done .text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.editInput {
+  padding: 5px;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 5px;
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { TodoInfo } from "../../App";
 import styles from "./TodoFilters.module.scss";
 
@@ -14,25 +15,39 @@ export const TodoFilters = ({
   onGetCompleted,
   todoInfo,
 }: TodoFiltersProps) => {
+  const [activeFilter, setActiveFilter] = useState("all");
+
   console.log(todoInfo);
   const getProgressTodo = () => {
+    setActiveFilter("inWork");
     onGetProgressTodo();
   };
   const getAllTodo = () => {
+    setActiveFilter("all");
     onGetAllTodo();
   };
   const getCompletedTodo = () => {
+    setActiveFilter("completed");
     onGetCompleted();
   };
   return (
     <div className={styles.containerTodo}>
-      <button onClick={getAllTodo} className={styles.allTodo}>
+      <button
+        onClick={getAllTodo}
+        className={`${styles.filterBtn} ${activeFilter === "all" ? styles.active : ""}`}
+      >
         Все ({todoInfo.all})
       </button>
-      <button onClick={getProgressTodo} className={styles.progressTodo}>
+      <button
+        onClick={getProgressTodo}
+        className={`${styles.filterBtn} ${activeFilter === "inWork" ? styles.active : ""}`}
+      >
         В прогрессе ({todoInfo.inWork})
       </button>
-      <button onClick={getCompletedTodo} className={styles.completedTodo}>
+      <button
+        onClick={getCompletedTodo}
+        className={`${styles.filterBtn} ${activeFilter === "completed" ? styles.active : ""}`}
+      >
         Завершенные ({todoInfo.completed})
       </button>
     </div>
