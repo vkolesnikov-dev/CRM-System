@@ -7,13 +7,36 @@ interface TodoFormProps {
 
 export const TodoForm = ({ addTask }: TodoFormProps) => {
   const [todoInput, setTodoInput] = useState("");
+  const [error, setError] = useState("");
+
+  const validate = (value: string) => {
+    if (!value.trim()) {
+      return "Поле должно быть обязательным для заполнения";
+    }
+    if (value.length < 2) {
+      return "Должно быть минимум 2 символа";
+    }
+    if (value.length > 64) {
+      return "Должно быть максимум 64 символа";
+    }
+    return "";
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoInput(event.target.value);
+    const value = event.target.value;
+    setError(validate(value));
+    setTodoInput(value);
   };
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    const validationError = validate(todoInput);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
     addTask(todoInput);
     setTodoInput("");
+    setError("");
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -24,6 +47,7 @@ export const TodoForm = ({ addTask }: TodoFormProps) => {
         onChange={handleChange}
       />
       <button className={styles.button}>Add</button>
+      {error && <span className={styles.error}>{error}</span>}
     </form>
   );
 };

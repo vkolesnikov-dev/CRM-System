@@ -24,7 +24,7 @@
 }
 
 .editButton {
-  background-color: rgb(242, 19, 19);
+  background-color: rgb(233, 83, 83);
   border: none;
   width: 30px;
   height: 30px;
@@ -91,4 +91,17 @@
   padding: 5px;
   border: 1px solid rgb(192, 192, 192);
   border-radius: 5px;
+}
+
+.error {
+  display: block;
+  color: rgb(225, 53, 53);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.editBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

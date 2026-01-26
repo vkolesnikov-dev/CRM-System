@@ -20,3 +20,10 @@
 .input:focus {
   outline: none;
 }
+
+.error {
+  display: block;
+  color: rgb(225, 53, 53);
+  font-size: 12px;
+  margin-top: 4px;
+}

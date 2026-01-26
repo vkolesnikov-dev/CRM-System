@@ -18,6 +18,7 @@ export const TodoItem = ({
 }: TodoItemProps) => {
   const [isChange, setIsChange] = useState(true);
   const [inputValue, setInputValue] = useState(task.title);
+  const [error, setError] = useState("");
 
   const handleChangeTask = () => {
     setIsChange(!isChange);
@@ -29,8 +30,24 @@ export const TodoItem = ({
     onUpdateTodo(task.id, newStatus);
   };
   const handleTitle = async () => {
+    const value = inputValue.trim();
+    if (!value) {
+      setError("Поле должно быть заполненно");
+      return;
+    }
+
+    if (value.length < 2) {
+      setError("Должно быть минимум 2 символа");
+      return;
+    }
+    if (value.length > 64) {
+      setError("Должно быть максимум 64 символа");
+      return;
+    }
+
     onUpdateTodo(task.id, task.isDone, inputValue);
     setIsChange(!isChange);
+    setError("");
   };
   const deleteTask = async () => {
     onDeleteTodo(task.id);
@@ -68,11 +85,14 @@ export const TodoItem = ({
           />
           <span className={styles.checkmark}></span>
         </label>
-        <input
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          className={styles.editInput}
-        />
+        <div className={styles.editBlock}>
+          <input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            className={styles.editInput}
+          />
+          {error && <span className={styles.error}>{error}</span>}
+        </div>
         <div className={styles.btnBlock}>
           <button onClick={deleteTask} className={styles.delButton}>
             <img src={Delete} alt="Delete" />
